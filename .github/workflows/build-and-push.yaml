@@ -90,7 +90,7 @@ jobs:
         with:
           tags: ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           platforms: linux/amd64,linux/s390x,linux/ppc64le
-          push: true
+          push: false
 
       # Create CI Manifests
       - name: Set up manifests for CI
