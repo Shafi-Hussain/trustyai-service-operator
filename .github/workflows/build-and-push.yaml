@@ -91,6 +91,8 @@ jobs:
           tags: ${{ env.IMAGE_NAME }}:${{ env.TAG }}
           platforms: linux/amd64,linux/s390x,linux/ppc64le
           push: false
+          outputs: |
+            type=image
 
       # Create CI Manifests
       - name: Set up manifests for CI
@@ -113,22 +115,22 @@ jobs:
           create-target-branch-if-needed: 'true'
 
       # Leave comment
-      - uses: peter-evans/find-comment@v3
-        name: Find Comment
-        id: fc
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          comment-author: 'github-actions[bot]'
-          body-includes: PR image build and manifest generation completed successfully
-      - uses: peter-evans/create-or-update-comment@v4
-        name: Generate/update success message comment
-        with:
-          comment-id: ${{ steps.fc.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
-          edit-mode: replace
-          body: |
-            PR image build and manifest generation completed successfully!
+      # - uses: peter-evans/find-comment@v3
+      #   name: Find Comment
+      #   id: fc
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     comment-author: 'github-actions[bot]'
+      #     body-includes: PR image build and manifest generation completed successfully
+      # - uses: peter-evans/create-or-update-comment@v4
+      #   name: Generate/update success message comment
+      #   with:
+      #     comment-id: ${{ steps.fc.outputs.comment-id }}
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     edit-mode: replace
+      #     body: |
+      #       PR image build and manifest generation completed successfully!
 
-            📦 [PR image](https://quay.io/trustyai/trustyai-service-operator-ci:${{ github.event.pull_request.head.sha }}): `quay.io/trustyai/trustyai-service-operator-ci:${{ github.event.pull_request.head.sha }}`
+      #       📦 [PR image](https://quay.io/trustyai/trustyai-service-operator-ci:${{ github.event.pull_request.head.sha }}): `quay.io/trustyai/trustyai-service-operator-ci:${{ github.event.pull_request.head.sha }}`
 
-            🗂️ [CI manifests](https://github.com/trustyai-explainability/trustyai-service-operator-ci/tree/operator-${{ env.TAG }})
+      #       🗂️ [CI manifests](https://github.com/trustyai-explainability/trustyai-service-operator-ci/tree/operator-${{ env.TAG }})
