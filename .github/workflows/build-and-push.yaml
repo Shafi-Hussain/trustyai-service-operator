@@ -66,7 +66,7 @@ jobs:
           echo "TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
           echo "IMAGE_NAME=quay.io/trustyai/trustyai-service-operator-ci" >> $GITHUB_ENV
       - name: Set main-branch environment
-        if:  env.BUILD_CONTEXT == 'main'
+        if:  env.BUILD_CONTEXT == 'ppc64le'
         run: |
           echo "TAG=latest" >> $GITHUB_ENV
           echo "IMAGE_NAME=${{ vars.QUAY_RELEASE_REPO }}" >> $GITHUB_ENV
