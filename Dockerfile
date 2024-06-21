@@ -3,6 +3,8 @@ FROM registry.access.redhat.com/ubi8/go-toolset:1.20 as builder
 ARG TARGETOS
 ARG TARGETARCH
 
+RUN echo "CI_CONTAINER_VERSION=${CI_CONTAINER_VERSION}"
+
 WORKDIR /workspace
 # Copy the Go Modules manifests
 COPY go.mod go.mod
